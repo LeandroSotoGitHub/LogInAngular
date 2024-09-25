@@ -11,6 +11,7 @@ import { usernameExistsValidator, usernameValidator } from 'src/app/shared/valid
 export class RegisterComponent {
   registerForm: FormGroup
   passwordStrength: number = 0
+  passwordStrengthMessage: string = ''
   private _snackBar = inject(MatSnackBar)
 
 
@@ -24,23 +25,75 @@ export class RegisterComponent {
     })
   }
 
+  // metodos para html
+  checkPasswordStrength() {
+    if (this.passwordStrength === 5) {
+      this.passwordStrengthMessage = 'Contraseña fuerte';
+    } else if (this.passwordStrength === 4) {
+      this.passwordStrengthMessage = 'Contraseña aceptable';
+    } else {
+      this.passwordStrengthMessage = 'Contraseña débil';
+    }
+  }
   onStrengthChange(strength: number): void {
-    this.passwordStrength = strength;
+    this.passwordStrength = strength
+    this.checkPasswordStrength()
   }
 
-  hasErrors(controlName: string, errorType: string) {
-    return this.registerForm.get(controlName)?.hasError(errorType) && this.registerForm.get(controlName)?.touched;
-  }
+  hasError(controlName: string): string | null {
+    const control = this.registerForm.get(controlName)
 
-  // SWITCH SEGUN CONTROL NAME
+    let message: string | null = null
+
+    if (control?.touched && control?.errors){
+      switch (controlName){
+        case 'user':
+          if (control.hasError('required')) {
+            message = 'El campo es obligatorio';
+          } else if (control.hasError('usernameExists')) {
+            message = 'Este nombre de usuario ya está en uso';
+          } else if (control.hasError('specialCharNumber')) {
+            message = 'El nombre de usuario debe contener al menos un número y un carácter especial';
+          }
+          break;
+
+          case 'name':
+            case 'surname':
+            if(control.hasError('required')){
+              message = 'El campo es obligatorio'
+            }
+            break
+            
+          case 'mail':
+            if (control.hasError('required')) {
+              message = 'El campo es obligatorio';
+            } else if (control.hasError('email')) {
+              message = 'Formato inválido';
+            }
+            break;
+      
+          case 'pass':
+            if (control.hasError('required')) {
+              message = 'El campo es obligatorio';
+            } else if (control.hasError('minlength')) {
+              message = 'Caracteres mínimos: 7';
+            } else if (control.hasError('weakPassword')) {
+              message = 'La contraseña debe ser fuerte (4 o más puntos).';
+            }
+            break;
+      
+            default:
+              break;
+      }
+    }
+    return message;
+  }
 
   submit() {
     if (this.registerForm.valid) {
       const formData = this.registerForm.value
       // Recuperar usuarios existentes de Local Storage
       const existingUsers = JSON.parse(localStorage.getItem('registerData') || '[]')
-
-
       //comprobar si ya hay un usuario con ese nombre
       const userExists = existingUsers.some((user: any) => user.user.toLowerCase() === formData.user.toLowerCase());
       if (userExists) {
@@ -49,23 +102,25 @@ export class RegisterComponent {
       }
       // Agregar el nuevo usuario a la lista
       existingUsers.push(formData)
-
-      
       // Guardar la lista actualizada en Local Storage
       localStorage.setItem('registerData', JSON.stringify(existingUsers))
-      console.log('Datos guardados en Local Storage:', existingUsers)
 
       // ngOnDestroy, para limpiar el formulario.
       this.openSnackBar('Enviado con éxito!')
     } else {
     this.openSnackBar('Error, corrige los campos')
     }
-    console.log('Formulario:', this.registerForm)
-    console.log('Estado del formulario:', this.registerForm.valid)
-    console.log('Errores del formulario:', this.registerForm.errors)
   }
 
-  openSnackBar(message: string) {
-    this._snackBar.open(message)
+
+  private openSnackBar(message: string) {
+    this._snackBar.open(message, 'Cerrar', {
+      duration: 5000, // Duración en milisegundos que el snackbar estará visible
+      horizontalPosition: 'center', // Posición horizontal
+      verticalPosition: 'top', // Posición vertical
+    }).onAction().subscribe(() => {
+      // Aquí puedes manejar cualquier acción que desees al hacer clic en el botón de cerrar
+      console.log('SnackBar cerrado por el usuario.');
+    });
   }
 }

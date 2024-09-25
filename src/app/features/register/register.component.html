@@ -18,40 +18,38 @@
     <mat-card-content>
       <form [formGroup]="registerForm" (ngSubmit)="submit()">
 
-        <mat-form-field appearance="outline" class="w-full" >
+        <mat-form-field appearance="outline" class="w-full">
           <mat-label>Crea tu usuario</mat-label>
           <input matInput placeholder="Crea tu usuario" formControlName="user"/>
-          <mat-error *ngIf="hasErrors('user' , 'required')">El campo es obligatorio</mat-error>
-          <mat-error *ngIf="hasErrors('user', 'usernameExists')">Este nombre de usuario ya está en uso</mat-error>
-          <mat-error *ngIf="hasErrors('user' , 'specialCharNumber')">El nombre de usuario debe contener al menos un número y un carácter especial</mat-error>
+          <mat-error *ngIf="hasError('user')">{{ hasError('user') }}</mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline" class="w-full" >
+        
+        <mat-form-field appearance="outline" class="w-full">
           <mat-label>Ingresá tu nombre</mat-label>
           <input matInput placeholder="Nombre" formControlName="name"/>
-          <mat-error *ngIf="hasErrors('name' , 'required')">El campo es obligatorio</mat-error>
+          <mat-error *ngIf="hasError('name')">{{ hasError('name') }}</mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline" class="w-full" >
+        
+        <mat-form-field appearance="outline" class="w-full">
           <mat-label>Ingresá tu apellido</mat-label>
           <input matInput placeholder="Apellido" formControlName="surname"/>
-          <mat-error *ngIf="hasErrors('surname' , 'required')">El campo es obligatorio</mat-error>
+          <mat-error *ngIf="hasError('surname')">{{ hasError('surname') }}</mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline" class="w-full" >
+        
+        <mat-form-field appearance="outline" class="w-full">
           <mat-label>Ingresá tu E-Mail</mat-label>
           <input matInput placeholder="example@gmail.com" formControlName="mail"/>
-          <mat-error *ngIf="hasErrors('mail' , 'required')">El campo es obligatorio</mat-error>
-          <mat-error *ngIf="hasErrors('mail' , 'email')">Formato inválido</mat-error>
+          <mat-error *ngIf="hasError('mail')">{{ hasError('mail') }}</mat-error>
         </mat-form-field>
-
-
-
+        
         <mat-form-field appearance="outline" class="w-full">
           <mat-label>Crea tu contraseña</mat-label>
           <input matInput type="password" appPassDirective (strengthChanged)="onStrengthChange($event)" placeholder="Crea tu contraseña" formControlName="pass"/>
-          <mat-error *ngIf="hasErrors('pass' , 'required')">El campo es obligatorio</mat-error>
-          <mat-error *ngIf="hasErrors('pass' , 'minlength')">Caracteres minimos 7</mat-error>
-          <mat-error *ngIf="hasErrors('pass', 'weakPassword')">La contraseña debe ser fuerte (4 o más puntos).</mat-error> <!-- Mensaje para contraseña débil -->
-
+          <mat-error *ngIf="hasError('pass')">{{ hasError('pass') }}</mat-error>
         </mat-form-field>
+
+
+
         <mat-progress-bar *ngIf="passwordStrength !== null" mode="determinate" [value]="passwordStrength * 20"></mat-progress-bar>
         <p *ngIf="passwordStrength === 5">Contraseña fuerte</p>
         <p *ngIf="passwordStrength === 4">Contraseña aceptable</p>
@@ -59,13 +57,12 @@
 
         <!-- PASAR LOGICA A TS -- CON UNA VARIABLE Y TEXTO -->
 
-
-
-
         <mat-card-actions>
           <button mat-flat-button>Validar</button>
           <button mat-flat-button [routerLink]="['/login']">Volver</button>
         </mat-card-actions>
+
+
       </form>
     </mat-card-content>
     

@@ -12,6 +12,7 @@ import { StoredUser } from 'src/app/shared/models';
 export class LoginComponent {
   storedData: any
   loginForm: FormGroup
+  hidePassword: boolean = true;
   private router = inject(Router) // preguntar si se puede hacer de otra manera.
   private _snackBar = inject(MatSnackBar)
 
@@ -29,6 +30,9 @@ export class LoginComponent {
     return this.loginForm.get(controlName)?.hasError(errorType) && this.loginForm.get(controlName)?.touched
   }
 
+  togglePasswordVisibility() {
+    this.hidePassword = !this.hidePassword;
+  }
   
   submit() {
     const { user, pass } = this.loginForm.value;
@@ -87,6 +91,13 @@ export class LoginComponent {
   } 
 
   private openSnackBar(message: string) {
-    this._snackBar.open(message)
+    this._snackBar.open(message, 'Cerrar', {
+      duration: 5000, // Duración en milisegundos que el snackbar estará visible
+      horizontalPosition: 'center', // Posición horizontal
+      verticalPosition: 'top', // Posición vertical
+    }).onAction().subscribe(() => {
+      // Aquí puedes manejar cualquier acción que desees al hacer clic en el botón de cerrar
+      console.log('SnackBar cerrado por el usuario.');
+    });
   }
 }
