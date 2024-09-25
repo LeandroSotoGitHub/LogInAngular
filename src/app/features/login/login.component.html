@@ -1,0 +1,41 @@
+<div
+  style="
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #333;
+  "
+>
+  <mat-card>
+    <mat-card-header style="margin-bottom: 20px">
+      <mat-card-title>Iniciar sesión</mat-card-title>
+      <!-- <mat-card-subtitle>subtitle</mat-card-subtitle> -->
+    </mat-card-header>
+
+
+    <mat-card-content>
+
+      <form [formGroup]="loginForm" (ngSubmit)="submit()">
+        <mat-form-field appearance="outline" class="w-full" >
+          <mat-label>Usuario o Mail</mat-label>
+          <input matInput placeholder="Usuario o mail" formControlName="user"/>
+          <mat-error *ngIf="hasErrors('user' , 'required')">El campo es obligatorio</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Contraseña</mat-label>
+          <input matInput placeholder="Contraseña" formControlName="pass"/>
+          <mat-error *ngIf="hasErrors('pass' , 'required')">El campo es obligatorio</mat-error>
+        </mat-form-field>
+        
+        <mat-card-actions>
+          <button mat-flat-button>Validar</button>
+          <button mat-flat-button [routerLink]="['/register']">Registrarse</button>
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+    
+  </mat-card>
+</div>

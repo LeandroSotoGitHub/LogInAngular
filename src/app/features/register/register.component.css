@@ -1,0 +1,8 @@
+form{
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+mat-form-field{
+    width: 30vw;
+}
