@@ -21,6 +21,7 @@ export class PassDirectiveDirective {
   // Método que calcula la fortaleza de la contraseña según varias reglas
   private calculatePasswordStrength(password: string): number {
     let strength = 0
+    
     const hasLowerCase = /[a-z]/.test(password)  // Verifica si tiene letras minúsculas
     const hasUpperCase = /[A-Z]/.test(password)  // Verifica si tiene letras mayúsculas
     const hasNumbers = /\d/.test(password)       // Verifica si tiene números

@@ -4,7 +4,7 @@ import { Router } from "@angular/router"
 export const loginGuard = () =>{
     const router = inject(Router)
 
-    if(localStorage.getItem('registerData')){
+    if (localStorage.getItem('loginData')){//ACA
         return true
     }else {
         router.navigate(['login'])

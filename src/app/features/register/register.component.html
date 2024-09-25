@@ -22,6 +22,7 @@
           <mat-label>Crea tu usuario</mat-label>
           <input matInput placeholder="Crea tu usuario" formControlName="user"/>
           <mat-error *ngIf="hasErrors('user' , 'required')">El campo es obligatorio</mat-error>
+          <mat-error *ngIf="hasErrors('user', 'usernameExists')">Este nombre de usuario ya está en uso</mat-error>
           <mat-error *ngIf="hasErrors('user' , 'specialCharNumber')">El nombre de usuario debe contener al menos un número y un carácter especial</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" class="w-full" >
@@ -55,6 +56,8 @@
         <p *ngIf="passwordStrength === 5">Contraseña fuerte</p>
         <p *ngIf="passwordStrength === 4">Contraseña aceptable</p>
         <p *ngIf="passwordStrength < 4">Contraseña débil</p>
+
+        <!-- PASAR LOGICA A TS -- CON UNA VARIABLE Y TEXTO -->
 
 
 
