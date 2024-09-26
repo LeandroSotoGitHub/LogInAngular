@@ -38,12 +38,12 @@ export class LoginComponent {
     const { user, pass } = this.loginForm.value;
     
     if (this.isLoginValid(user, pass)) {
+      //seteamos
+      this.setValidUser(user)
 
       //navegamos
       this.router.navigate([''])
 
-      //seteamos
-      this.setValidUser()
 
     } else {
       //manejamos error
@@ -84,11 +84,16 @@ export class LoginComponent {
           }
 
   //seteamos user en el local
-  private setValidUser(){
-    const validUser = this.storedData
-    localStorage.setItem('loginData', JSON.stringify(validUser))
-    console.log(validUser)
-  } 
+  private setValidUser(user: string){
+    localStorage.removeItem('loginData'); // Elimina los datos anteriores de login
+
+  // Busca el usuario en los datos registrados
+  const foundUser = this.findUser(user);
+  if (foundUser) {
+    // Guarda solo los datos del usuario que acaba de iniciar sesión
+    localStorage.setItem('loginData', JSON.stringify(foundUser));
+  }
+}
 
   private openSnackBar(message: string) {
     this._snackBar.open(message, 'Cerrar', {

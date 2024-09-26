@@ -7,3 +7,24 @@
     align-items: center;
     
 }
+
+.edit-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: auto; /* Asegura que sea clicable */
+  }
+
+  button[mat-icon-button] {
+    pointer-events: auto; /* Permite que el botón sea clicable */
+  }
+
+form{
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+mat-form-field{
+    width: 30vw;
+}

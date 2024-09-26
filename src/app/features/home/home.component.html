@@ -1,10 +1,74 @@
 <div class="container">
     <h1>Bienvenido!</h1>
     <mat-card>
-        <mat-card-title>
-            Información de usuario
-        </mat-card-title>
-        
+      <mat-card-title>
+        Información de usuario
+      </mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="homeForm">
+          
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Nombre de usuario</mat-label>
+            <input matInput placeholder="Crea tu usuario" formControlName="user" [disabled]="!isEditing" />
+            
+            <button mat-icon-button *ngIf="isEditing" (click)="saveEditing('user')" matTooltip="Guardar">
+              <mat-icon>check</mat-icon>
+            </button>
+            
+            <button mat-icon-button *ngIf="!isEditing" (click)="enableEditing('user')" matTooltip="Editar">
+              <mat-icon>edit</mat-icon>
+            </button>
+
+            <button mat-icon-button *ngIf="isEditing" (click)="cancelEditing('user')" matTooltip="Cancelar">
+              <mat-icon>cancel</mat-icon>
+            </button>
+
+          </mat-form-field>
+          
+          <!-- <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Tu nombre</mat-label>
+            <input matInput placeholder="Nombre" formControlName="name" />
+            <button mat-icon-button (click)="isEditing ? null : enableEditing()" matTooltip="Editar">
+              <mat-icon>{{ isEditing ? 'check' : 'edit' }}</mat-icon>
+            </button>
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Tu apellido</mat-label>
+            <input matInput placeholder="Apellido" formControlName="surname" />
+            <button mat-icon-button (click)="isEditing ? null : enableEditing()" matTooltip="Editar">
+              <mat-icon>{{ isEditing ? 'check' : 'edit' }}</mat-icon>
+            </button>
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Tu E-Mail</mat-label>
+            <input matInput placeholder="example@gmail.com" formControlName="mail" />
+            <button mat-icon-button (click)="isEditing ? null : enableEditing()" matTooltip="Editar">
+              <mat-icon>{{ isEditing ? 'check' : 'edit' }}</mat-icon>
+            </button>
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Tu contraseña</mat-label>
+            <input matInput type="password" appPassDirective placeholder="Crea tu contraseña" formControlName="pass" />
+            <button mat-icon-button (click)="isEditing ? null : enableEditing()" matTooltip="Editar">
+              <mat-icon>{{ isEditing ? 'check' : 'edit' }}</mat-icon>
+            </button>
+          </mat-form-field> -->
+  
+          <mat-card-actions>
+            <button mat-flat-button type="submit" [disabled]="!isEditing">Guardar Cambios</button>
+            <button mat-flat-button [routerLink]="['/login']">Volver</button>
+          </mat-card-actions>
+  
+          <!-- Mensaje de éxito -->
+          <div *ngIf="successMessage" class="success-message">
+            {{ successMessage }}
+          </div>
+  
+        </form>
+      </mat-card-content>
     </mat-card>
-    
-</div>
+  </div>
+  

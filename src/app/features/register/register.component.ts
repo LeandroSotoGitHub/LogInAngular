@@ -23,6 +23,7 @@ export class RegisterComponent {
       pass: ['', [Validators.required, Validators.minLength(7)]],
       mail: ['', [Validators.required, Validators.email]]
     })
+    
   }
 
   // metodos para html

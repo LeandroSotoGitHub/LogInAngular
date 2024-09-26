@@ -51,9 +51,7 @@
 
 
         <mat-progress-bar *ngIf="passwordStrength !== null" mode="determinate" [value]="passwordStrength * 20"></mat-progress-bar>
-        <p *ngIf="passwordStrength === 5">Contraseña fuerte</p>
-        <p *ngIf="passwordStrength === 4">Contraseña aceptable</p>
-        <p *ngIf="passwordStrength < 4">Contraseña débil</p>
+        <p>{{ passwordStrengthMessage }}</p>
 
         <!-- PASAR LOGICA A TS -- CON UNA VARIABLE Y TEXTO -->
 
