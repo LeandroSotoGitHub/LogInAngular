@@ -87,12 +87,12 @@ export class LoginComponent {
   private setValidUser(user: string){
     localStorage.removeItem('loginData'); // Elimina los datos anteriores de login
 
-  // Busca el usuario en los datos registrados
-  const foundUser = this.findUser(user);
-  if (foundUser) {
-    // Guarda solo los datos del usuario que acaba de iniciar sesión
-    localStorage.setItem('loginData', JSON.stringify(foundUser));
-  }
+    // Busca el usuario en los datos registrados
+    const foundUser = this.findUser(user);
+    if (foundUser) {
+      // Guarda solo los datos del usuario que acaba de iniciar sesión
+      localStorage.setItem('loginData', JSON.stringify(foundUser));
+    }
 }
 
   private openSnackBar(message: string) {

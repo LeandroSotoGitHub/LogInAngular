@@ -7,56 +7,119 @@
       <mat-card-content>
         <form [formGroup]="homeForm">
           
+          <!-- Campo de nombre de usuario -->
           <mat-form-field appearance="outline" class="w-full">
             <mat-label>Nombre de usuario</mat-label>
-            <input matInput placeholder="Crea tu usuario" formControlName="user" [disabled]="!isEditing" />
+            <input matInput placeholder="Crea tu usuario" formControlName="user" />
             
-            <button mat-icon-button *ngIf="isEditing" (click)="saveEditing('user')" matTooltip="Guardar">
+            <!-- Botón para guardar -->
+            <button mat-icon-button *ngIf="isEditing['user']" (click)="saveEditing('user')" matTooltip="Guardar">
               <mat-icon>check</mat-icon>
             </button>
-            
-            <button mat-icon-button *ngIf="!isEditing" (click)="enableEditing('user')" matTooltip="Editar">
-              <mat-icon>edit</mat-icon>
-            </button>
 
-            <button mat-icon-button *ngIf="isEditing" (click)="cancelEditing('user')" matTooltip="Cancelar">
+            <!-- Botón para cancelar -->
+            <button mat-icon-button *ngIf="isEditing['user']" (click)="cancelEditing('user')" matTooltip="Cancelar">
               <mat-icon>cancel</mat-icon>
             </button>
 
-          </mat-form-field>
-          
-          <!-- <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Tu nombre</mat-label>
-            <input matInput placeholder="Nombre" formControlName="name" />
-            <button mat-icon-button (click)="isEditing ? null : enableEditing()" matTooltip="Editar">
-              <mat-icon>{{ isEditing ? 'check' : 'edit' }}</mat-icon>
+            <!-- Botón para editar -->
+            <button mat-icon-button *ngIf="!isEditing['user']" (click)="enableEditing('user')" matTooltip="Editar">
+              <mat-icon>edit</mat-icon>
             </button>
           </mat-form-field>
-          
+
+
+
           <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Tu apellido</mat-label>
-            <input matInput placeholder="Apellido" formControlName="surname" />
-            <button mat-icon-button (click)="isEditing ? null : enableEditing()" matTooltip="Editar">
-              <mat-icon>{{ isEditing ? 'check' : 'edit' }}</mat-icon>
+            <mat-label>Nombre</mat-label>
+            <input matInput placeholder="Tu nombre" formControlName="name" />
+            
+            <!-- Botón para guardar -->
+            <button mat-icon-button *ngIf="isEditing['name']" (click)="saveEditing('name')" matTooltip="Guardar">
+              <mat-icon>check</mat-icon>
+            </button>
+
+            <!-- Botón para cancelar -->
+            <button mat-icon-button *ngIf="isEditing['name']" (click)="cancelEditing('name')" matTooltip="Cancelar">
+              <mat-icon>cancel</mat-icon>
+            </button>
+
+            <!-- Botón para editar -->
+            <button mat-icon-button *ngIf="!isEditing['name']" (click)="enableEditing('name')" matTooltip="Editar">
+              <mat-icon>edit</mat-icon>
             </button>
           </mat-form-field>
-          
+
+
+
           <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Tu E-Mail</mat-label>
-            <input matInput placeholder="example@gmail.com" formControlName="mail" />
-            <button mat-icon-button (click)="isEditing ? null : enableEditing()" matTooltip="Editar">
-              <mat-icon>{{ isEditing ? 'check' : 'edit' }}</mat-icon>
+            <mat-label>Apellido</mat-label>
+            <input matInput placeholder="Tu apellido" formControlName="surname" />
+            
+            <!-- Botón para guardar -->
+            <button mat-icon-button *ngIf="isEditing['surname']" (click)="saveEditing('surname')" matTooltip="Guardar">
+              <mat-icon>check</mat-icon>
+            </button>
+
+            <!-- Botón para cancelar -->
+            <button mat-icon-button *ngIf="isEditing['surname']" (click)="cancelEditing('surname')" matTooltip="Cancelar">
+              <mat-icon>cancel</mat-icon>
+            </button>
+
+            <!-- Botón para editar -->
+            <button mat-icon-button *ngIf="!isEditing['surname']" (click)="enableEditing('surname')" matTooltip="Editar">
+              <mat-icon>edit</mat-icon>
             </button>
           </mat-form-field>
-          
+
+
+
           <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Tu contraseña</mat-label>
-            <input matInput type="password" appPassDirective placeholder="Crea tu contraseña" formControlName="pass" />
-            <button mat-icon-button (click)="isEditing ? null : enableEditing()" matTooltip="Editar">
-              <mat-icon>{{ isEditing ? 'check' : 'edit' }}</mat-icon>
+            <mat-label>E-Mail</mat-label>
+            <input matInput placeholder="Tu mail" formControlName="mail" />
+            
+            <!-- Botón para guardar -->
+            <button mat-icon-button *ngIf="isEditing['mail']" (click)="saveEditing('mail')" matTooltip="Guardar">
+              <mat-icon>check</mat-icon>
             </button>
-          </mat-form-field> -->
+
+            <!-- Botón para cancelar -->
+            <button mat-icon-button *ngIf="isEditing['mail']" (click)="cancelEditing('mail')" matTooltip="Cancelar">
+              <mat-icon>cancel</mat-icon>
+            </button>
+
+            <!-- Botón para editar -->
+            <button mat-icon-button *ngIf="!isEditing['mail']" (click)="enableEditing('mail')" matTooltip="Editar">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </mat-form-field>
+
+
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Contraseña</mat-label>
+            <input matInput placeholder="Tu Contraseña" formControlName="pass" />
+            
+            <!-- Botón para guardar -->
+            <button mat-icon-button *ngIf="isEditing['pass']" (click)="saveEditing('pass')" matTooltip="Guardar">
+              <mat-icon>check</mat-icon>
+            </button>
+
+            <!-- Botón para cancelar -->
+            <button mat-icon-button *ngIf="isEditing['pass']" (click)="cancelEditing('pass')" matTooltip="Cancelar">
+              <mat-icon>cancel</mat-icon>
+            </button>
+
+            <!-- Botón para editar -->
+            <button mat-icon-button *ngIf="!isEditing['pass']" (click)="enableEditing('pass')" matTooltip="Editar">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </mat-form-field>
   
+
+
+
+
           <mat-card-actions>
             <button mat-flat-button type="submit" [disabled]="!isEditing">Guardar Cambios</button>
             <button mat-flat-button [routerLink]="['/login']">Volver</button>
